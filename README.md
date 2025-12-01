@@ -31,3 +31,9 @@ infra
 ```
 
 handler, infra も domain みたいにディレクトリを切った方が命名が簡素になるのでそうしたい。
+
+```bash
+go install go.uber.org/mock/mockgen@latest
+```
+
+で Mock 生成するよ。

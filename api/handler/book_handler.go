@@ -60,12 +60,11 @@ func (h *BookHandler) CreateBook(c echo.Context) error {
 		return err
 	}
 	slog.Info("CreateBook", "req", req)
-	b, err := book.NewBook(req.Title, req.Authors)
+	ctx := c.Request().Context()
+	b, err := h.Service.CreateBook(ctx, &book.CreateBookRequest{Title: req.Title, Authors: req.Authors})
 	if err != nil {
 		return err
 	}
-	ctx := c.Request().Context()
-	b, err = h.Service.CreateBook(ctx, b)
 	return c.JSON(http.StatusOK, &createBookResponse{
 		ID:    b.ID,
 		Title: b.Title,

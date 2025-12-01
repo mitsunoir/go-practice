@@ -1,6 +1,10 @@
 package book
 
-import "github.com/google/uuid"
+import (
+	"errors"
+
+	"github.com/google/uuid"
+)
 
 type Book struct {
 	ID      string
@@ -10,6 +14,9 @@ type Book struct {
 }
 
 func NewBook(title string, authors []string) (*Book, error) {
+	if title == "" {
+		return nil, errors.New("Book title must not be empty")
+	}
 	return &Book{
 		ID:      uuid.NewString(),
 		Title:   title,

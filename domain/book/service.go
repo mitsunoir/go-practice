@@ -20,10 +20,19 @@ func (s *Service) FindBook(ctx context.Context, id string) (*Book, error) {
 	return book, nil
 }
 
-func (s *Service) CreateBook(ctx context.Context, b *Book) (*Book, error) {
-	book, err := s.BookRepo.Create(ctx, b)
+type CreateBookRequest struct {
+	Title   string
+	Authors []string
+}
+
+func (s *Service) CreateBook(ctx context.Context, req *CreateBookRequest) (*Book, error) {
+	b, err := NewBook(req.Title, req.Authors)
 	if err != nil {
 		return nil, err
 	}
-	return book, nil
+	b, err = s.BookRepo.Create(ctx, b)
+	if err != nil {
+		return nil, err
+	}
+	return b, nil
 }
