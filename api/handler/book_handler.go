@@ -63,7 +63,9 @@ func (h *BookHandler) CreateBook(c echo.Context) error {
 	ctx := c.Request().Context()
 	b, err := h.Service.CreateBook(ctx, &book.CreateBookRequest{Title: req.Title, Authors: req.Authors})
 	if err != nil {
-		return err
+		// TODO JSON object として返す
+		// TODO エラーを domain で定義してちゃんと判定して返す
+		return c.JSON(http.StatusBadRequest, "You are wrong")
 	}
 	return c.JSON(http.StatusOK, &createBookResponse{
 		ID:    b.ID,
