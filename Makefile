@@ -22,3 +22,5 @@ test-book:
 	res=$$(curl -s -X GET "http://localhost:1323/api/v1/books/$$id"); \
 	echo "get: res=$$res";
 
+test:
+	go test -v ./...

@@ -10,10 +10,11 @@ import (
 
 func main() {
 	bookRepo := db.NewBookRepository()
-	bookService := book.NewService(bookRepo)
+	authorRepo := db.NewAuthorRepository()
+	bookValidator := book.NewValidator(authorRepo)
+	bookService := book.NewService(bookRepo, bookValidator)
 	bookHandler := handler.NewBookHandler(bookService)
 
-	authorRepo := db.NewAuthorRepository()
 	authorService := author.NewService(authorRepo)
 	authorHandler := handler.NewAuthorHandler(authorService)
 

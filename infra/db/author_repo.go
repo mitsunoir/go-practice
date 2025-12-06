@@ -16,11 +16,11 @@ func NewAuthorRepository() *AuthorRepository {
 }
 
 func (r *AuthorRepository) FindByID(ctx context.Context, id string) (*author.Author, error) {
-	if author, ok := authorDB[id]; !ok {
+	author, ok := authorDB[id]
+	if !ok {
 		return nil, fmt.Errorf("Author(id=%s) not found", id)
-	} else {
-		return author, nil
 	}
+	return author, nil
 }
 func (r *AuthorRepository) Create(ctx context.Context, a *author.Author) (*author.Author, error) {
 	authorDB[a.ID] = a

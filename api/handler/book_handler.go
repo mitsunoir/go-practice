@@ -21,8 +21,9 @@ type getBookRequest struct {
 }
 
 type getBookResponse struct {
-	ID    string `json:"id"`
-	Title string `json:"title"`
+	ID      string   `json:"id"`
+	Title   string   `json:"title"`
+	Authors []string `json:"authors"`
 }
 
 func (h *BookHandler) GetBook(c echo.Context) error {
@@ -39,8 +40,9 @@ func (h *BookHandler) GetBook(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, "Not found")
 	}
 	return c.JSON(http.StatusOK, &getBookResponse{
-		ID:    b.ID,
-		Title: b.Title,
+		ID:      b.ID,
+		Title:   b.Title,
+		Authors: b.Authors,
 	})
 }
 
@@ -50,8 +52,9 @@ type createBookRequest struct {
 }
 
 type createBookResponse struct {
-	ID    string `json:"id"`
-	Title string `json:"title"`
+	ID      string   `json:"id"`
+	Title   string   `json:"title"`
+	Authors []string `json:"authors"`
 }
 
 func (h *BookHandler) CreateBook(c echo.Context) error {
@@ -68,7 +71,8 @@ func (h *BookHandler) CreateBook(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, "You are wrong")
 	}
 	return c.JSON(http.StatusOK, &createBookResponse{
-		ID:    b.ID,
-		Title: b.Title,
+		ID:      b.ID,
+		Title:   b.Title,
+		Authors: b.Authors,
 	})
 }

@@ -1,8 +1,6 @@
 package book
 
 import (
-	"errors"
-
 	"github.com/google/uuid"
 )
 
@@ -14,9 +12,6 @@ type Book struct {
 }
 
 func NewBook(title string, authors []string) (*Book, error) {
-	if title == "" {
-		return nil, errors.New("Book title must not be empty")
-	}
 	return &Book{
 		ID:      uuid.NewString(),
 		Title:   title,
